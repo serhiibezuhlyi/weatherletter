@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD npm run migration:run && node dist/main.js
+CMD npm run migrate:run && node dist/src/main.js
