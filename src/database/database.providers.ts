@@ -15,7 +15,11 @@ export const databaseProviders = [
         database: 'weatherletter',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
-        ]
+        ],
+        migrations: [
+          __dirname + '/../migrations/*.ts'
+        ],
+        migrationsRun: true,
       });
 
       return dataSource.initialize();
