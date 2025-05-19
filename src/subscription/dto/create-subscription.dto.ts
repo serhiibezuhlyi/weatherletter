@@ -1,6 +1,4 @@
 import { IsBoolean, IsEmail, IsIn, IsString } from 'class-validator';
-import { OneToOne } from 'typeorm';
-import { Forecast } from '../../weather/entities/weather.entity';
 
 export class CreateSubscriptionDto {
 

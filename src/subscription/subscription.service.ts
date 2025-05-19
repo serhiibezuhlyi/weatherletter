@@ -2,9 +2,9 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
 import { Subscribers } from './entities/subscription.entity';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { SUBSCRIPTION_REPOSITORY } from '../../constants';
-import * as crypto from 'crypto'
+import * as crypto from 'crypto';
 
 
 @Injectable()

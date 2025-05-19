@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weatherletter</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<h1>WeatherLetter</h1>
+
+<div class="mainContent">
+  <div class="column">
+
+    <h3>You can check weather. Just type your city.</h3>
+    <input type="text" id="cityWeather" name="cityWeather" placeholder="Enter your city" required />
+
+    <button id="checkWeatherBtn">Check</button>
+
+    <div class="result" id="weatherResponse"></div>
+
+  </div>
+
+  <div class="column">
+    <form id="subscribeForm">
+      <h3>Please, fill form below to subscribe on weatherletter</h3>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+      <input type="text" id="city" name="city" placeholder="Enter your city" required />
+
+      <select id="freq" name="freq" required>
+        <option value="hourly">hourly</option>
+        <option value="daily">daily</option>
+      </select>
+
+      <button type="submit">Subscribe</button>
+    </form>
+
+    <div class="result" id="formResponse"></div>
+  </div>
+
+  <div class="column">
+    <h3>Actions with token</h3>
+    <input type="text" id="token" name="token" placeholder="Paste your token" required />
+
+    <button id="confirmTokenBtn" style="margin-bottom: 20px">Confirm</button>
+
+    <button id="unsubscribeBtn">Unsubscribe</button>
+
+  </div>
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>

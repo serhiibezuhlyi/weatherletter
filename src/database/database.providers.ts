@@ -10,7 +10,7 @@ export const databaseProviders = [
         type: 'postgres',
         host: process.env.DATABASE_HOST,
         port: Number(process.env.DATABASE_PORT),
-        username: 'postgres',
+        username: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASSWORD,
         database: 'weatherletter',
         entities: [

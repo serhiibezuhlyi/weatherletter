@@ -1,8 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WeatherService } from './weather.service';
-import { DatabaseModule } from '../database/database.module';
-import { weatherProviders } from './weather.providers';
-import { DataSource } from 'typeorm';
 import { WEATHER_REPOSITORY } from '../../constants';
 
 describe('WeatherService', () => {

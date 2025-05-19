@@ -1,19 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  HttpException,
-  HttpStatus,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, UseInterceptors } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
-import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
-import { FileInterceptor, NoFilesInterceptor } from '@nestjs/platform-express';
+import { NoFilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('subscription')
 export class SubscriptionController {
@@ -46,7 +34,7 @@ export class SubscriptionController {
 
     return {
       statusCode: HttpStatus.OK,
-      message: `Subscription successful. Confirmation email sent.`,
+      message: `Subscription successful. Confirmation email sent. Token: ${token}`,
     };
   }
 

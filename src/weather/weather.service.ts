@@ -1,6 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWeatherDto } from './dto/create-weather.dto';
-import { UpdateWeatherDto } from './dto/update-weather.dto';
 import { Repository } from 'typeorm';
 import { Forecast } from './entities/weather.entity';
 import { WEATHER_REPOSITORY } from '../../constants';
