@@ -21,33 +21,44 @@ export class SubscriptionController {
 
   @Post('subscribe')
   @UseInterceptors(NoFilesInterceptor())
-  subscribe(@Body() body: any) {
+  async subscribe(@Body() body: any) {
 
-    if (!['hourly', 'daily'].includes(body.frequency)){
+    if (!body.email || !body.city || !body.frequency || !['hourly', 'daily'].includes(body.frequency)){
       throw new HttpException('Invalid input', HttpStatus.BAD_REQUEST);
     }
 
-    const subscribed = ['email1@gmail.com', 'email3@gmail.com'];
-
-    if (subscribed.includes(body.email)){
+    if (await this.subscriptionService.isEmailExists(body.email)){
       throw new HttpException('Email already subscribed', HttpStatus.CONFLICT);
     }
 
-    //some logic from service
+    const subscription: CreateSubscriptionDto = {
+      email: body.email,
+      city: body.city,
+      frequency: body.frequency,
+      is_verified: false
+    }
+
+    await this.subscriptionService.create(subscription)
+
+    const token = this.subscriptionService.encrypt(subscription.email);
+
+    //some function to send email with link https://{domain_name}/subscription/subscribe/{token}
+
     return {
       statusCode: HttpStatus.OK,
-      message: 'Subscription successful. Confirmation email sent.'
+      message: `Subscription successful. Confirmation email sent.`,
     };
   }
 
   @Get('confirm/:token')
-  confirm(@Param('token') token: string) {
+  async confirm(@Param('token') token: string) {
 
-    if (!token) {
+    try{
+      const email = this.subscriptionService.decrypt(token);
+      await this.subscriptionService.update(email, {is_verified: true});
+    } catch(error){
       throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
     }
-
-    console.log(token);
 
     return {
       statusCode: HttpStatus.OK,
@@ -57,13 +68,14 @@ export class SubscriptionController {
   }
 
   @Get('unsubscribe/:token')
-  unsubscribe(@Param('token') token: string) {
+  async unsubscribe(@Param('token') token: string) {
 
-    if (!token) {
+    try{
+      const email = this.subscriptionService.decrypt(token);
+      await this.subscriptionService.remove(email)
+    } catch(error){
       throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
     }
-
-    console.log(token);
 
     return {
       statusCode: HttpStatus.OK,
